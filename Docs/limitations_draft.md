@@ -24,7 +24,7 @@ Even after controlling for student and school socio-economic status, many factor
 
 ## 4. Controlling for ESCS: confounder or mediator?
 
-We control for family background (ESCS) and school intake (school-average ESCS) to separate school resources from who attends the school. But if wealthier communities fund better-equipped schools, part of the true resource effect runs *through* socio-economic status, and controlling for it removes that part as well. We therefore present RQ1 as the **unadjusted** association and RQ2 as the association **adjusted for ESCS**. Comparing the two shows how much of each school factor's association travels with family background. Neither model gives a formal bound on the true effect, because with observational data other unmeasured factors can push the estimates in either direction.
+We control for family background (ESCS) and school intake (school-average ESCS) to separate school resources from who attends the school. But if wealthier communities fund better-equipped schools, part of the true resource effect runs *through* socio-economic status, and controlling for it removes that part as well. The planned comparison presents RQ1 as the **unadjusted** association and RQ2 as the association **adjusted for ESCS**. Comparing the two shows how much of each school factor's association travels with family background. Neither model gives a formal bound on the true effect, because with observational data other unmeasured factors can push the estimates in either direction.
 
 ## 5. Measurement: the variables do not measure exactly what the minister asked about
 
@@ -45,14 +45,14 @@ The pipeline replaced missing school variables with country medians and flagged 
 - **Austria:** school type (`SCHLTYPE`) is entirely missing; all schools were coded as public by imputation.
 - **Belgium, Netherlands, France, Germany:** 20–48% of the teacher-certification values are imputed.
 
-Fully imputed variables are excluded from any country-specific statement and from the country clustering. **[update after results]** Report whether the main results change when imputed rows are excluded.
+The original clustering included STAFFSHORT despite complete imputation in Estonia. The sensitivity analysis removes it across all seven systems. **[update after results]** Report whether the main results change when imputed rows are excluded.
 
 ## 7. Who is missing: sample coverage and COVID
 
 - **Response rates in 2022.** PISA 2022 was conducted during the COVID-19 pandemic, and the OECD notes that its data files include all participating systems, even those with low response rates. Countries that did not meet sampling standards are marked with an asterisk in OECD tables. **[verify which of our 14 are flagged — likely the Netherlands]** If schools or students who did not take part are systematically weaker (e.g. disadvantaged schools under pandemic strain), country averages are biased upward and the relationship between resources and results may be distorted.
-- **Ukrainian regions.** Only 18 regions were assessed, during the war. Results do not represent Ukraine as a whole, and the conditions of testing are not comparable to other systems. We report results with and without this system.
+- **Ukrainian regions.** Only 18 regions were assessed, during the war. Results do not represent Ukraine as a whole, and the conditions of testing are not comparable to other systems. RQ4 includes a sensitivity analysis excluding this system.
 - **Who PISA excludes by design:** 15-year-olds not enrolled in school, students in schools excluded for practical reasons, and students with certain special needs. Systems with higher exclusion rates look better than they are.
-- **Only 14 European systems.** Our conclusions apply to these systems and should not be extended to Europe as a whole or to the 80+ PISA participants.
+- **Fourteen systems in preparation, seven in RQ3–RQ4.** Our conclusions apply to these systems and should not be extended to Europe as a whole or to the 80+ PISA participants.
 
 ## 8. COVID as a confounder, not just a response-rate issue
 
@@ -60,14 +60,14 @@ School closures in 2020–21 differed between and within countries. Schools with
 
 ## 9. Pooling countries and the risk of misleading averages
 
-Students are nested in schools, which are nested in countries. A relationship in the pooled data can differ from, or even reverse, the relationship within each country (Simpson's paradox). For example, a country with both large classes and high scores (Poland) can create a positive pooled association even if smaller classes help within every country. We use senate weights so each country counts equally, and **[update after results]** compare pooled coefficients with per-country coefficients.
+Students are nested in schools, which are nested in countries. A relationship in the pooled data can differ from, or even reverse, the relationship within each country (Simpson's paradox). For example, a country with both large classes and high scores (Poland) can create a positive pooled association even if smaller classes help within every country. The completed pooled ML analysis uses final student weights. Equal-country weighting with SENWT is a different estimand. Confirm the RQ1–RQ2 weighting when those results arrive.
 
 ## 10. Statistical method choices
 
-- **Uncertainty.** Standard errors use the 80 replicate weights and the 10 plausible values (Rubin's rules). Ignoring either would understate uncertainty and make weak associations look significant.
+- **Uncertainty.** The dataset contains 80 replicate weights. RQ3 averages test metrics over ten separate PV fits and provides no design-based standard errors. Ignoring either would understate uncertainty and make weak associations look significant.
 - **Effective sample size.** Although we have 121,564 students, the three policy levers vary only between 4,347 schools. Precision for school factors is limited accordingly.
 - **Random Forest.** It is trained on point estimates and evaluated on a held-out set of schools; it does not use replicate weights or all plausible values in the same way as the regression. Its feature importances indicate predictive usefulness, not direction or causal effect, and are not directly comparable to regression coefficients.
-- **Clustering.** With only 14 countries, clusters are sensitive to which features and how many clusters are chosen. We report stability checks and treat clusters as descriptive.
+- **Clustering.** With seven systems in RQ4, clusters are sensitive to which features and how many clusters are chosen. We report stability checks and treat clusters as descriptive.
 - **Linearity.** The regression assumes each lever has the same effect at every level. Thresholds (e.g. equipment only mattering when severely lacking) are detected only by the Random Forest.
 
 ## 11. Scope of the outcome

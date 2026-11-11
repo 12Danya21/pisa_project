@@ -23,7 +23,7 @@
 |---|---|---|---|
 | `PV1MATH` … `PV10MATH` | Student | Ten **plausible values** of the student's maths score. Each student answers only part of the test, so PISA does not give one score but ten equally plausible draws from the range of scores the student could have. The scale is set so the OECD mean is about 500 and the SD about 100. | Higher maths proficiency |
 
-**How to use:** run every analysis 10 times (once per PV) and combine with Rubin's rules. Averaging the 10 PVs into one column before modelling gives correct point estimates but **understates the uncertainty**. Using only PV1 is what the brief explicitly calls wrong.
+**How to use:** Fit each model separately for each plausible value and combine the resulting estimates. For inferential analyses, account for both sampling and between-PV uncertainty. RQ3 reports average predictive metrics only.
 
 **Rough scale for interpretation:** in our sample the student SD is about 91 points. A difference of ~20 points is often described as roughly half to one school year of learning, but this rule of thumb is debated, so use it carefully in the minister's recommendation.
 

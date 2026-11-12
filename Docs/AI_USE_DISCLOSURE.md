@@ -21,3 +21,7 @@ RQ1/RQ2 coefficients and standard errors were independently reproduced; source d
 ## Information still needed for final disclosure
 
 Each participant should add their actual earlier prompts, exact model label if known, meaningful configuration, contribution, and measurable effort/cost. Unknown values remain explicitly unknown, not zero. The team must review interpretations and be able to explain the changes. Final report/slides and policy recommendation are intentionally outside this correction stage.
+
+## Follow-up drafting request
+
+The user authorized removing redundant project files and starting the report, explicitly clarifying that his contribution included compiling all team members’ work and checking consistency, beyond joint interpretation with Alex. Codex helped remove duplicate exports, preserve historical files, draft the report and contribution statement, and check the document layout. Original specialist contributions remain credited to their authors. The report is a first draft for team review, not a claim that every participant has approved it. No additional RF training was required for this drafting/cleanup stage; regression exports were regenerated to verify naming and numerical consistency.

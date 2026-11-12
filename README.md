@@ -32,8 +32,8 @@ The main RQ3 includes EDUSHORT, CLSIZE, PROATCE_10PP, ESCS, SCH_ESCS and country
 
 Download the PISA 2022 student and school SAS datasets from the [official OECD database](https://www.oecd.org/en/data/datasets/pisa-2022-database.html). Extract `CY08MSP_SCH_QQQ.SAS7BDAT` and `CY08MSP_STU_QQQ.SAS7BDAT` to `data/raw/` and run `notebooks/Data Engineering & Pipeline Lead_FINAL (3).ipynb`. The pipeline retains 14 systems and exports the processed Parquet; each analysis selects the agreed seven. Raw files were not available for this revision, so a raw rebuild and identity with the reviewed hash are not claimed. Do not overwrite the reviewed file without retaining its copy and provenance.
 
-`notebooks/01_initial_exploration.ipynb` is a historical initial inspection, explicitly labelled as such; its local SAV paths are not required for the current analysis. `scripts/run_checks.py` reproduces the old-model checks under `history/` and is not the current analysis.
+Initial exploration is retained only in `history/pre_fix_49e71c4/notebooks/01_initial_exploration.ipynb`. Old-model checks are in `history/legacy_tools/run_checks.py`; neither is part of the current reproduction route. Redundant CSV aliases and the old requirements alias have been removed. Use `requirements.txt` and the canonical results under `results/revised/`.
 
 ## Submission scope
 
-See `PROJECT_NOTES.md` for the Data Analytics briefing checklist, team roles and dates. Final report, slides and the four-sentence recommendation remain intentionally deferred until the corrected analysis is reviewed. Hackathon formatting/deadline rules do not apply to this project.
+See `PROJECT_NOTES.md` for the Data Analytics briefing checklist, team roles and dates. An initial report with the four-sentence recommendation is in `report/PISA_report_draft.md`; the editable Word copy is distributed in the review package. Slides remain to be assembled. Team contributions and the project lead’s integration role are documented in `Docs/TEAM_CONTRIBUTIONS.md`. Hackathon formatting/deadline rules do not apply to this project.

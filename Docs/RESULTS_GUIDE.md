@@ -83,4 +83,4 @@ The selected k=2 is stable to the tested K-means initialization seeds and agrees
 - Seven-country clustering is exploratory. The strongest split isolates QUR; finer groupings depend on the specification.
 - The data cannot identify the best return on ministry investment because intervention effects and costs are absent.
 
-Final recommendation/report/slides remain deferred. To prepare them, use these verified outputs, the limitations document, the factual AI-use log and the Data Analytics checklist in PROJECT_NOTES.md.
+The first report draft and four-sentence recommendation are now in `report/PISA_report_draft.md`. Use the verified outputs and limitations below when revising it. Presentation slides remain to be assembled.

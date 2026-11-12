@@ -1,2 +1,0 @@
-# Compatibility entry point; current analysis and historical checks share an environment.
--r requirements.txt

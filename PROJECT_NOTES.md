@@ -25,13 +25,13 @@ The briefing does not impose the previous hackathon word counts, Word+PDF pair, 
 | Dario | Survey Statistics & Econometrics |
 | Ezzeldin A. Fekry | Machine Learning & Clustering |
 | Alex | Interpretation & Critical Limitations |
-| Danylo Redko (project lead, user) | Synthesis & Communication; interpretation with Alex |
+| Danylo Redko (project lead, user) | Project Lead, Integration & Results Synthesis; cross-team consistency review, report and presentation coordination; interpretation with Alex |
 
 These are the user-reported assignments, not a signed declaration of contribution. Exact preferred names can be confirmed when preparing the contribution slide. The historical commit log is in `history/pre_fix_49e71c4/PROJECT_NOTES.md`.
 
 ## Current analytical state
 
-See `Docs/RESULTS_GUIDE.md` for current results and `Docs/CHANGELOG_AND_ROLLBACK.md` for changes. RQ1/RQ2 is now integrated; RQ3/RQ4 is corrected and exported separately from the historical run. Raw data and source results have been preserved. Report, minister recommendation and presentation have not been assembled during this correction stage, as requested.
+See `Docs/RESULTS_GUIDE.md` for current results and `Docs/CHANGELOG_AND_ROLLBACK.md` for changes. RQ1/RQ2 is now integrated; RQ3/RQ4 is corrected and exported separately from the historical run. Raw data and source results have been preserved. A first report draft and four-sentence recommendation have now been prepared following the user’s request. The presentation remains to be assembled.
 
 ## Remaining communication work
 

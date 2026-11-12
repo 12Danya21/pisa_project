@@ -41,3 +41,7 @@ No original data were deleted and no force-push or main-branch overwrite is part
 - Revised RQ3 executes ten distinct PV fits per model/specification/split; current results record runtime and library versions.
 - RQ4 exports observed/prepared and without-QUR/leave-feature/seed/Ward sensitivities; no claims of survey-bootstrap stability.
 - Raw SAS reconstruction is not claimed; participants’ earlier AI prompts/configuration remain incompletely known.
+
+## Follow-up cleanup and report draft
+
+At the user’s request, a separate follow-up commit removes the obsolete active exploration notebook (its original remains in the historical snapshot), moves old-model checking code to history/legacy_tools/, removes the redundant requirements alias, eliminates three duplicate CSV aliases and renames the population-weight CSV consistently. RQ1/RQ2 exports were regenerated; its estimates remain unchanged. The initial report, contribution account and project lead’s presentation segment are now included. The original correction commit remains available for rollback of this cleanup without undoing the statistical corrections.

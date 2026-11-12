@@ -1,3 +1,6 @@
+"""Historical specification checks only. Current analysis: revised_analysis.py.
+Use --output outside results/revised/ to avoid mixing versions.
+"""
 from pathlib import Path
 import pandas as pd
 import numpy as np

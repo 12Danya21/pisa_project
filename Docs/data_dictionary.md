@@ -1,95 +1,41 @@
-# Data Dictionary — PISA 2022, Project A
+# Data dictionary — reviewed preparation file and analytical subset
 
-**Owner:** Interpretation & Limitations Lead
-**Dataset described:** `data/processed/pisa_cleaned_dataset.parquet` (121,564 students, 4,347 schools, 14 education systems, 111 columns)
-**Source:** OECD PISA 2022 database (cycle CY08), student file `CY08MSP_STU_QQQ` and school file `CY08MSP_SCH_QQQ`
-**Status:** Draft. Codings marked *(verify)* should be checked against the official codebook (`school_meta.variable_value_labels`) before the report is submitted.
+The unchanged preparation file contains 121,564 student records, 4,347 schools, 14 systems and 111 columns. All current RQ1–RQ4 use DEU, ESP, EST, FRA, ITA, POL and QUR: 70,517 students and 2,449 schools. Exact provenance and SHA-256 are in `data/DATA_MANIFEST.json`. Counts describe sampled records, not population sizes.
 
-> The brief asks us to "write down, in your own words, what ten of the fields actually mean." This file does that, and adds for each field **who reported it** and **what a high value means**, because both determine how a coefficient can be read.
+## Fields in plain language
 
----
-
-## 1. Identifiers
-
-| Field | Level | Meaning in plain words |
+| Field | Level | Meaning and interpretation |
 |---|---|---|
-| `CNT` | Country | Three-letter code of the education system. `QUR` = Ukrainian regions (18 regions tested in 2022, not the whole country). |
-| `CNTSCHID` | School | School ID, unique **only together with** `CNT`. Key used to merge students with their school. |
-| `SCHOOL_GROUP_ID` | School | `CNT` + `CNTSCHID` joined as text (e.g. `AUT_4000006`). Use it to split train/test **by school** in the Random Forest. |
+| CNT | System | Education-system identifier. QUR represents the Ukrainian regions assessed, not all of Ukraine. |
+| CNTSCHID | School | School identifier. Use together with CNT for joins and grouping. |
+| SCHOOL_GROUP_ID | School | Composite CNT + school ID. All students in a school stay in the same training/test partition. |
+| PV1MATH–PV10MATH | Student | Ten plausible draws for latent mathematics proficiency, not ten observed repeat test scores. Higher means higher proficiency. |
+| EDUSHORT | School | Principal-reported index of educational material/infrastructure shortages hindering instruction. Higher means greater shortage; it is not equipment spending. |
+| CLSIZE | School | Principal-reported class-size measure for the relevant modal grade/test-language class, represented by size-band values. It is not a direct measure of each student's mathematics class. |
+| PROATCE | School | Proportion of teachers fully certified by the appropriate authority; in this file 0–1. Certification is not the quality of teaching or professional development. |
+| PROATCE_10PP | School, derived | PROATCE × 10. One unit is ten percentage points of certification (e.g. 0.70→0.80). Current models create it; its absence in the original parquet is expected. |
+| ESCS | Student | Economic, social and cultural status index based on family background/home resources. Higher values indicate greater socioeconomic advantage. |
+| SCH_ESCS | School, derived | Mean of observed sampled students' ESCS in that school, computed before student ESCS imputation. Represents the level of school intake, not teaching quality, a causal peer effect, or the degree of segregation across schools. |
+| W_FSTUWT | Student | Final survey weight: the represented population contribution of a sampled student. Used for within-country descriptive means and population sensitivity. |
+| SENWT | Student | Pipeline weight rescaled to total 1,000 per system. Equal-country pooled comparisons are proportional to these weights on the common full subset. Training/testing normalize their own country totals. |
+| W_FSTURWT1–80 | Student | Fay-BRR replicate weights for survey sampling uncertainty. RQ1/RQ2 uses all 80 per independent system, on the same scale as the main weights. |
+| *_imputed | Respective level | 1 means the original value was missing and the pipeline replaced it; 0 means observed. Zero remaining nulls does not mean complete original observations. |
+| STAFFSHORT | School, secondary only | Principal-reported staff-shortage index. It is not teacher qualification. Fully imputed in Estonia (and Belgium in the preparation sample); excluded from current main models and clustering. |
+| STRATIO | School, unused in current main models | Student-to-teacher ratio across the school. Different from class size. |
+| SCHLTYPE | School, unused in current main models | Categorical school governance/management variable. Do not treat its numeric labels as a continuous scale. Fully imputed in Austria in the preparation file; cannot substantiate an Austrian governance-share statement. |
 
-## 2. Outcome: mathematics performance
+## Plausible values and uncertainty
 
-| Field | Level | Meaning in plain words | High value means |
-|---|---|---|---|
-| `PV1MATH` … `PV10MATH` | Student | Ten **plausible values** of the student's maths score. Each student answers only part of the test, so PISA does not give one score but ten equally plausible draws from the range of scores the student could have. The scale is set so the OECD mean is about 500 and the SD about 100. | Higher maths proficiency |
+RQ1/RQ2 fits all ten PVs, combines coefficient estimates, averages sampling variance and adds (1+1/10) times the between-PV variance. Sampling variance uses 0.05 × sum of squared replicate deviations (80 replicates, Fay coefficient 0.5), applied one independent country at a time. Its p-values and intervals use normal approximations. Averaging PVs before a nonlinear model is not equivalent to fitting ten models; even for a fixed-design linear model where coefficients commute with averaging, the mean alone does not retain PV uncertainty.
 
-**How to use:** Fit each model separately for each plausible value and combine the resulting estimates. For inferential analyses, account for both sampling and between-PV uncertainty. RQ3 reports average predictive metrics only.
+RQ3 fits LR and RF separately for every PV and reports mean held-out MAE/R². It does not provide BRR confidence intervals. Across-PV or across-split spread is descriptive, not a design-based standard error. RQ4 uses resource/background features and no maths outcome, so it needs no PV aggregation.
 
-**Rough scale for interpretation:** in our sample the student SD is about 91 points. A difference of ~20 points is often described as roughly half to one school year of learning, but this rule of thumb is debated, so use it carefully in the minister's recommendation.
+## Missingness and predictor availability
 
-## 3. The three policy levers (research question 1)
+RQ1/RQ2 preserves the reviewed pipeline data and reports complete-case sensitivity (56,287 records). In the seven-system subset, unweighted student shares flagged are 3.82% for ESCS, 8.96% for EDUSHORT, 8.85% for CLSIZE and 15.33% for PROATCE. These are not school shares or weighted population shares.
 
-| Field | Policy lever | Who reported it | What it measures | High value means | Distribution in our data |
-|---|---|---|---|---|---|
-| `EDUSHORT` | **Equipment** | School principal | Index of how much the principal thinks a lack or poor quality of educational material (textbooks, IT equipment, library, lab material) and physical infrastructure (building, heating, classrooms) hinders instruction. Standardised so the OECD mean is 0, SD 1. | **More shortage = worse equipment** | Mean −0.26. **26% of students are at the floor (−1.42)**, i.e. principal reports no shortage at all. |
-| `CLSIZE` | **Class size** | School principal | Average size of the test-language class in the modal grade for 15-year-olds, taken from size **bands**, so values are band midpoints. | Larger classes | Only 9 possible values: 13, 18, 23, 28 … 53. Median 23. |
-| `PROATCE` | **Teacher training** | School principal | Proportion of all teachers at the school who are **fully certified** by the appropriate authority. | More certified teachers | Mean 0.84. **36% of students are in schools with exactly 1.0** (all certified). |
+RQ3 restores missing values from the flags, calculates medians from training records only (one record per school for school fields), then applies those parameters to held-out schools. SCH_ESCS is recalculated from observed ESCS within each partition's schools. Prediction assumes background information about the new school's sampled intake is available; it is not an outcome leak. Individual missing ESCS is filled with the training country median; no missing-PV values are imputed.
 
-**Interpretation warnings for this block**
+RQ4 estimates each country's feature mean from observed records, weighted by W_FSTUWT, excluding imputed entries variable by variable. Consequently features can use different responding subsets. `RQ4_feature_coverage.csv` quantifies this limitation; `RQ4_observed_vs_prepared_sensitivity.csv` compares with the prepared data. Country means describe students' school environments, not an equally weighted census of schools.
 
-- **Sign of `EDUSHORT`:** a *negative* coefficient means better-equipped schools score higher. Always rephrase as "less shortage" on slides.
-- **`CLSIZE` is not the maths class.** It refers to the language-of-instruction class. Band midpoints also blur within-band differences, which attenuates the coefficient.
-- **`PROATCE` ≠ "better-trained".** Certification is a legal status, not a measure of quality or in-service training. With so many schools at 1.0, there is little variation left to detect an effect.
-- **All three are principal perceptions** (or principal-reported counts), answered once per school. Principals in different countries may interpret "hinders instruction" differently.
-
-## 4. Additional school factors
-
-| Field | Who reported it | Meaning | High value means | Note |
-|---|---|---|---|---|
-| `STRATIO` | Principal (derived from staff and enrolment counts) | Students per teacher in the whole school | More students per teacher | Overlaps conceptually with `CLSIZE` (correlation 0.19). 9 schools report values above 40, including some at 100 — likely reporting errors; check before modelling. |
-| `STAFFSHORT` | Principal | Index of how much a lack of teaching or assisting staff hinders instruction (OECD mean 0, SD 1) | More staff shortage | Directly relevant to the teacher question. **Not available at all for Belgium and Estonia** (100% imputed) — see section 7. |
-| `SCHLTYPE` | Principal / national centre | School management type. *(verify)* 1 = private independent, 2 = private government-dependent, 3 = public. | — | **Categorical, not numeric.** One-hot encode it. Not available for Austria (100% imputed as public). |
-
-## 5. Family and school background (research question 2)
-
-| Field | Level | Meaning in plain words | High value means |
-|---|---|---|---|
-| `ESCS` | Student | PISA index of **economic, social and cultural status**: built from parents' highest education, parents' highest occupation, and home possessions (including books at home). OECD mean 0, SD 1. | More advantaged family background |
-| `SCH_ESCS` | School | Average `ESCS` of the sampled students in the school, computed by our pipeline. Captures the **social composition of the school's intake**. | More advantaged student intake |
-
-**Why both are needed:** student `ESCS` controls for the individual's family. `SCH_ESCS` controls for the fact that advantaged students are concentrated in certain schools, and those schools may also have better resources. Correlation between the two is 0.51.
-
-## 6. Weights
-
-| Field | Meaning | When to use |
-|---|---|---|
-| `W_FSTUWT` | Final student weight: how many 15-year-olds in the country this student represents. Corrects for unequal selection chances and non-response. | Country-level estimates (country means, per-country regressions). |
-| `W_FSTURWT1` … `W_FSTURWT80` | 80 **replicate weights** (BRR with Fay's adjustment, k = 0.5). Re-running a statistic with each one and measuring the spread gives correct standard errors that account for students being clustered in schools. | Standard errors and confidence intervals for every reported estimate. Variance = 0.05 × Σ (θᵣ − θ)². |
-| `SENWT` | **Senate weight**: rescaled so every country sums to the same total (1,000 in our file). Every country counts equally in pooled analyses. | Pooled (all-countries) models, so Spain (25% of rows) does not dominate. |
-
-**Consistency rule:** the replicate weights in the file are on the `W_FSTUWT` scale. If pooled models use `SENWT`, each replicate weight must be multiplied by the same per-country factor `SENWT / W_FSTUWT`; otherwise the standard errors do not belong to the estimates.
-
-## 7. Imputation flags
-
-Each `*_imputed` column is 1 if the original value was missing and replaced by the pipeline, otherwise 0.
-
-| Flag | Overall share imputed | Countries where it is a concern |
-|---|---|---|
-| `ESCS_imputed` | 3% | **Germany 13%** |
-| `PROATCE_imputed` | 16% | **Belgium 48%**, Netherlands 30%, France 28%, Germany 23% |
-| `STAFFSHORT_imputed` | 20% | **Belgium 100%, Estonia 100%** (no real data) |
-| `EDUSHORT_imputed`, `CLSIZE_imputed`, `STRATIO_imputed` | 9–12% | Netherlands, France, Germany ≈ 20–23% |
-| `SCHLTYPE_imputed` | 11% | **Austria 100%**, Belgium 60%, Germany 17% |
-| `SCH_ESCS_imputed` | <1% | — |
-
-**Rules for interpretation:**
-
-1. A variable that is 100% imputed in a country carries **no information** about that country. Austria's school type, and Belgium's and Estonia's staff shortage, must be excluded from any country-level statement and from clustering features.
-2. Median imputation pulls values to the middle, which **weakens associations**. Run the main regression once with flagged rows excluded as a robustness check.
-
-## 8. Fields we do not have (and why it matters)
-
-- **Teacher questionnaire data** (teacher qualifications, professional development hours): would measure "training" better than `PROATCE`, but only some countries ran it.
-- **Reading and science scores**: we analyse maths only.
-- **Prior achievement**: PISA is cross-sectional, so we cannot control for how strong students were before entering their school.
-- **Spending per student**: not in PISA at school level.
+No investment costs, previous achievement, direct teacher-training quality or experimental assignment are present. The model cannot calculate policy return on investment.

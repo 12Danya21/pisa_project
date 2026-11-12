@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Reviewed data is distributed in the local review package, not committed.
+data/raw/
+data/processed/*.parquet

@@ -1,0 +1,14 @@
+{
+  "path": "data/processed/pisa_cleaned_dataset.parquet",
+  "sha256": "2d1638ff15ba1a1dce592f0d5f67d6abc329e9e7155f4c6de340d615d8fb3bfb",
+  "source": "Team-supplied file attached to DA; three available copies have identical bytes. OECD PISA 2022 student/school records; pipeline inspected, raw reconstruction not rerun.",
+  "processed_rows": 121564,
+  "processed_columns": 111,
+  "processed_systems": 14,
+  "processed_schools": 4347,
+  "analysis_rows": 70517,
+  "analysis_schools": 2449,
+  "analysis_countries": ["DEU", "ESP", "EST", "FRA", "ITA", "POL", "QUR"],
+  "retrieval": "Included in the local review ZIP. For Git-only users, obtain this exact file from the project team. Raw source: https://www.oecd.org/en/data/datasets/pisa-2022-database.html",
+  "policy": "Do not overwrite or silently substitute data. Rebuilt versions require a new manifest and review."
+}

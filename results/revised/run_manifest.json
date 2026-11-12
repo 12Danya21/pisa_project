@@ -1,0 +1,43 @@
+{
+  "dataset_sha256": "2d1638ff15ba1a1dce592f0d5f67d6abc329e9e7155f4c6de340d615d8fb3bfb",
+  "students": 70517,
+  "schools": 2449,
+  "countries": [
+    "DEU",
+    "ESP",
+    "EST",
+    "FRA",
+    "ITA",
+    "POL",
+    "QUR"
+  ],
+  "seeds": [
+    42,
+    7,
+    2026
+  ],
+  "trees": 100,
+  "min_samples_leaf": 5,
+  "permutation_repeats": 3,
+  "selected_k": 2,
+  "elapsed_seconds": 366.48,
+  "python": "3.12.4",
+  "pandas": "2.2.2",
+  "numpy": "1.26.4",
+  "sklearn": "1.4.2",
+  "scope": "Ten separate PV fits; descriptive metrics/importance, no survey-design confidence intervals. Fixed untuned RF settings. Observed-only RQ4 means use variable-specific responding subsets; no stable population typology claim.",
+  "timing_scope": "Measured initial full revised RQ3+RQ4 run; later plot label/margin adjustments reran RQ4 only.",
+  "model_fit_count": {
+    "LinearRegression": 70,
+    "RandomForest": 70
+  },
+  "source_scripts_sha256": {
+    "scripts/country_summary.py": "1627ac8b983fd4dfa4f71f871cc7a5c00504acd3608004a2b92af7e2efa8eca0",
+    "scripts/finalize_outputs.py": "54f9d188962040f38bce5b3a3cc74bbbf07fe19431c172e962b297c7f69bc162",
+    "scripts/reproduce.py": "2e7ac182a33a89db6d0adb3fe3a0bde75d95ed6f485764b26a41cb77a2f5e069",
+    "scripts/revised_analysis.py": "6986c5c42ee86fb642898963b584a1759895eccc74c2f27af6d7a20424ea9120",
+    "scripts/run_checks.py": "4ef15ccbfdcc1d7901a43895916a1ce635dc6d18133dc03089f1bcb7daa5b14f",
+    "scripts/run_regression.py": "5503de06029afc518b2f0b00cfcc96b40cf68f2cdf37c195d3e8c20f1f8b0e8c",
+    "scripts/validate_revision.py": "5fdeda17a2657d0284aad252326c0125d7f5c913a107763fe32532d0bb47de0e"
+  }
+}

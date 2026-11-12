@@ -1,4 +1,2 @@
-pandas==2.2.2
-numpy==1.26.4
-scikit-learn==1.4.2
-pyarrow==21.0.0
+# Compatibility entry point; current analysis and historical checks share an environment.
+-r requirements.txt

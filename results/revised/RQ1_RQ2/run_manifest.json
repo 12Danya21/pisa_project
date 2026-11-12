@@ -1,0 +1,6 @@
+{
+  "dataset_sha256": "2d1638ff15ba1a1dce592f0d5f67d6abc329e9e7155f4c6de340d615d8fb3bfb",
+  "elapsed_seconds": 3.66,
+  "execution": "All notebook code cells sequentially; figures exported as PNG; stdout and tables retained in executed notebook.",
+  "uncertainty": "80 Fay-BRR replicates per independent system; ten PVs, sampling variance + (1+1/10)*between-PV variance; normal intervals."
+}

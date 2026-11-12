@@ -1,0 +1,3 @@
+model,n_students,n_terms,n_systems,n_pvs,n_replicates_per_system,mean_weighted_r2,elapsed_seconds,weighting_strategy
+RQ1_baseline,70517,10,7,10,80,0.05912917593848606,0.29,equal_country
+RQ2_ESCS_adjusted,70517,11,7,10,80,0.19384943355952933,0.34,equal_country

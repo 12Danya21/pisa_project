@@ -1,74 +1,34 @@
-# Country Context — 14 Education Systems
+# Country context — seven-system analytical sample
 
-**Owner:** Interpretation & Limitations Lead
-**Purpose:** give meaning to the RQ4 clusters and to country differences in RQ1–RQ3. When countries group together, this table is where we look for the reason.
-**Status:** Section A is computed from our data. Section B combines institutional knowledge with fields still to verify; anything marked *(verify)* must be checked against the sources listed at the bottom before it goes into the report.
+The preparation file covers 14 systems; this document describes only the seven used in every current RQ. Historical 14-system context remains under history/. Country codes and regional coverage must be retained when communicating results.
 
----
+## Descriptive sample summaries
 
-## A. What our data says (weighted with `W_FSTUWT`, mean of 10 PVs)
+Weights: W_FSTUWT within country. Mathematics means average the ten weighted PV means; they are descriptive, with no standard errors in this table. Resource means exclude flagged imputed values variable by variable and therefore describe responding subsets. No rank significance is implied. Certification is shown as a percentage, not in the model’s ten-point units.
 
-| CNT | System | Students | Schools | Maths mean | Mean ESCS | % private (any) | Mean PROATCE | Mean CLSIZE | Mean EDUSHORT | SD of school ESCS |
-|---|---|---|---|---|---|---|---|---|---|---|
-| EST | Estonia | 6,392 | 196 | 510 | 0.15 | 5 | 0.77 | 22.5 | −0.13 | 0.44 |
-| NLD | Netherlands | 5,046 | 154 | 493 | 0.26 | 45 | 0.86 | 24.4 | −0.56 | 0.45 |
-| BEL | Belgium | 8,286 | 285 | 489 | 0.09 | 84 † | 0.92 † | 19.9 | −0.21 | 0.54 |
-| POL | Poland | 6,011 | 240 | 489 | −0.10 | 7 | 0.88 | 28.3 | −0.37 | 0.54 |
-| AUT | Austria | 6,151 | 302 | 487 | 0.07 | 0 ‡ | 0.86 | 22.2 | −0.48 | 0.57 |
-| CZE | Czechia | 8,460 | 430 | 487 | −0.10 | 9 | 0.88 | 24.1 | −0.14 | 0.58 |
-| FIN | Finland | 10,239 | 241 | 484 | 0.26 | 5 | 0.88 | 19.8 | −0.57 | 0.31 |
-| SWE | Sweden | 6,072 | 262 | 482 | 0.33 | 20 | 0.83 | 24.0 | −0.63 | 0.39 |
-| DEU | Germany | 6,116 | 257 | 475 | −0.13 | 3 | 0.88 | 24.3 | −0.07 | 0.59 |
-| FRA | France | 6,770 | 282 | 474 | 0.00 | 21 | 0.83 | 29.4 | −0.39 | 0.65 |
-| ESP | Spain | 30,800 | 966 | 473 | −0.03 | 30 | 0.90 | 25.8 | −0.29 | 0.48 |
-| PRT | Portugal | 6,793 | 224 | 472 | −0.22 | 15 | 0.80 | 24.6 | 0.24 | 0.57 |
-| ITA | Italy | 10,552 | 344 | 471 | −0.10 | 4 | 0.74 | 23.9 | −0.21 | 0.55 |
-| QUR | Ukrainian regions | 3,876 | 164 | 441 | −0.35 | 2 | 0.69 | 24.7 | 0.91 | 0.51 |
+| CNT | Students | Schools | Maths mean | ESCS observed | CLSIZE observed | EDUSHORT observed | Certified teachers observed (%) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| DEU | 6,116 | 257 | 474.8 | -0.137 | 24.68 | -0.067 | 85.9 |
+| ESP | 30,800 | 966 | 473.1 | -0.033 | 26.10 | -0.295 | 87.1 |
+| EST | 6,392 | 196 | 509.9 | 0.151 | 22.46 | -0.128 | 76.9 |
+| FRA | 6,770 | 282 | 473.9 | 0.000 | 29.69 | -0.403 | 81.1 |
+| ITA | 10,552 | 344 | 471.3 | -0.100 | 23.90 | -0.206 | 73.7 |
+| POL | 6,011 | 240 | 489.0 | -0.105 | 28.28 | -0.366 | 88.1 |
+| QUR | 3,876 | 164 | 440.8 | -0.351 | 24.69 | 0.910 | 68.6 |
 
-† Belgium: `PROATCE` 48% imputed, `SCHLTYPE` 60% imputed. ‡ Austria: `SCHLTYPE` 100% imputed → the 0% is an artefact, not a fact.
+Machine-readable values and coverage: `results/revised/country_context_summary.csv` and `RQ4_feature_coverage.csv`. Reproduce with `python scripts/country_summary.py`. Country-level resource means describe students’ school environments, not each school counted equally.
 
-**How to read "SD of school ESCS":** how different schools are in the social background of their students. High values (France 0.65, Germany 0.59, Czechia 0.58, Austria 0.57) mean advantaged and disadvantaged students are **sorted into different schools**. Low values (Finland 0.31, Sweden 0.39) mean schools are socially mixed. This is the variable most likely to explain why some countries show strong school-level "effects": in sorted systems, school resources travel together with student intake.
+## Context supported by the supplied data and OECD sources
 
-**Patterns worth noting already:**
-- The Nordic and Baltic systems (FIN, SWE, EST) have the lowest social sorting between schools.
-- The early-tracking systems (DEU, AUT, CZE) plus France have the highest.
-- Ukrainian regions stand out on every resource indicator: highest equipment shortage (0.91), lowest teacher certification (0.69) and lowest scores. If kept, QUR will likely form a cluster of one.
-- Class size is largest in France (29) and Poland (28), smallest in Finland and Belgium (20). Note that Poland scores well despite large classes.
+- QUR represents Ukrainian regions (18 of 27); do not label it as national Ukraine. It has a particularly high shortage mean and lower background/performance in this selected sample. These descriptive differences do not identify the cause of an outlying cluster.
+- The [OECD Annex A2](https://www.oecd.org/en/publications/pisa-2022-results-volume-i_53f23881-en/full-report/the-pisa-target-population-the-pisa-samples-and-the-definition-of-schools_35666ed9.html) documents exclusion/coverage concerns; these must be distinguished from response-quality flags. See limitations_draft.md.
+- The [OECD sampling caution list](https://www.oecd.org/en/publications/pisa-2022-results-volume-ii_a97db61c-en/full-report/component-11.html) does not list these seven among the systems marked with a response/sampling caution asterisk. Do not use an earlier draft’s guess about the Netherlands to describe this sample: NLD is not analysed here.
+- Institutional tracking ages, governance shares and precise COVID closure durations in the initial draft were not verified for this revision. They have been removed from the active explanatory claims, rather than filled with guesses. They are not required cluster inputs.
 
-Code to reproduce Section A is in `notebooks/` *(add the notebook name once committed)*.
+## How to explain the clusters
 
----
+Use actual resource/background profiles and sensitivity tables in RESULTS_GUIDE.md. A grouping by these four means is not evidence of a shared institutional system. ESCS is a country background level; it is not a measure of between-school segregation. Do not attach “early tracking”, “comprehensive”, “better funded” or policy-effect labels without independent supporting evidence.
 
-## B. Institutional features (to complete and verify)
+## What this document does not claim
 
-| CNT | Age of first tracking *(verify)* | Type of system | Private-school model | COVID: school closure length 2020–21 *(fill from Vol II)* | OECD data-quality flag 2022 *(verify)* | Notes |
-|---|---|---|---|---|---|---|
-| AUT | 10 | Early tracking | Mostly public | | | Our SCHLTYPE unusable |
-| BEL | 12 | Tracking (community-specific: Flemish, French, German) | Large **government-funded** private (mainly Catholic) sector | | | Three separate systems pooled as one |
-| CZE | 11 | Early tracking (selective gymnázia) | Mostly public | | | |
-| DEU | 10 (most Länder) | Early tracking, federal (16 Länder) | Mostly public | | | ESCS 13% missing |
-| EST | 16 | Comprehensive | Mostly public | | | Highest scores in our sample |
-| ESP | 16 | Comprehensive, regionally governed | Large *concertada* (government-funded private) sector | | | Oversampled by region → 25% of rows |
-| FIN | 16 | Comprehensive | Almost all public | | | |
-| FRA | 15 | Comprehensive *collège*, then tracks | Large *privé sous contrat* (government-funded) sector | | | Highest social sorting |
-| ITA | 14 | Tracks from upper secondary (licei, tecnici, professionali) | Mostly public | | | Strong North–South gap |
-| NLD | 12 | Early tracking (VMBO / HAVO / VWO) | Majority of schools are government-funded private, but legally equal to public | | **Likely flagged** — low response rates *(verify)* | |
-| POL | 15 | Comprehensive (8-year primary since 2017 reform) | Mostly public | | | |
-| PRT | 15 | Comprehensive | Government-dependent private segment | | | |
-| QUR | 15 | Comprehensive | Mostly public | | Only 18 regions; tested during the war | Not an EU system |
-| SWE | 16 | Comprehensive | Large share of tax-funded independent schools (*friskolor*) | Lower secondary largely stayed open (Vol II names Sweden among limited-closure systems) | | |
-
-### How to fill the remaining columns
-
-1. **Age of first tracking** → Eurydice, *The structure of European education systems* (interactive diagrams). Look for the age at which students first enter different school types. Cross-check with OECD *Education at a Glance*, indicator on "age at first selection".
-2. **COVID closures** → *PISA 2022 Results, Volume II*, chapter "Learning during and from disruption" and its tables on the duration of school closures reported by students and principals.
-3. **Data-quality flags** → *PISA 2022 Results, Volume I*, Reader's Guide and Annexes A2 and A4. Countries that did not meet one or more sampling standards are marked with an asterisk (\*) in every table.
-4. **Private-school model** → describe in words; the numbers in Section A come from our own data.
-
----
-
-## C. Why this table matters for interpretation
-
-- **RQ1/RQ2:** in early-tracking systems, a school's resources are tied to which track it serves. A "school effect" there may be a **track effect**.
-- **RQ3:** if the Random Forest gives high importance to `CNT` or `SCH_ESCS`, the institutional features above are the likely explanation.
-- **RQ4:** our expectation before clustering is three groups: (1) comprehensive, socially mixed (FIN, SWE, EST, possibly POL); (2) early-tracking, socially sorted (DEU, AUT, CZE, NLD, BEL); (3) Southern European with mid-level sorting and large government-funded private sectors (ESP, ITA, PRT, FRA); plus QUR as an outlier. If the clusters do **not** look like this, that is itself a finding worth explaining.
+No experimental spending effect, exact ranking, all-Europe representation or verified institutional explanation is inferred. The original institutional hypotheses are preserved in history for provenance, not endorsed as findings.

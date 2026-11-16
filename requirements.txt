@@ -1,0 +1,12 @@
+# Numerical versions used for the reviewed run.
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+scipy==1.13.1
+pyarrow==21.0.0
+matplotlib==3.8.4
+seaborn>=0.13,<0.14
+# Required only for rebuilding the raw SAS pipeline.
+pyreadstat>=1.2,<2
+# Notebook viewing/editing; scripts do not require a running kernel.
+jupyterlab>=4,<5
